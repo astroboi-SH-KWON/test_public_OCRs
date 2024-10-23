@@ -4,6 +4,7 @@ Tesseract OCR, easyOCR etc
 # References
 * https://github.com/madmaze/pytesseract
 * https://www.kaggle.com/code/dhorvay/pytesseract-multiple-languages
+* https://pyimagesearch.com/2020/08/03/tesseract-ocr-for-non-english-languages/
 
 
 ## 1. Setting up the Environment for silicon mac 
@@ -19,7 +20,7 @@ Tesseract OCR, easyOCR etc
 
     conda install -c anaconda flask==3.0.3  # ~_api.py 사용 위해. v2.2.2 in mac studio, v2.0.3 in astroboi_m2
 
-    For language pack
+    For language pack : https://pyimagesearch.com/2020/08/03/tesseract-ocr-for-non-english-languages/
         os.environ['TESSDATA_PREFIX'] = "/Users/{User}/anaconda3/pkgs/tesseract-5.3.2-hbe6b26a_2/share/tessdata"
 
 
