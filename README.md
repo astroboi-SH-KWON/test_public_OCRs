@@ -29,7 +29,7 @@ Tesseract OCR, easyOCR etc
 
 
 ## 2. Setting up the Environment for ubuntu 
-    conda create -n test_ocr_c python==3.8.13
+    conda create -n test_ocr python==3.8.13
     conda activate test_ocr
     
     # # Must be pytorch>=2.x for easyocr 'weights_only'
@@ -39,7 +39,7 @@ Tesseract OCR, easyOCR etc
         >>> torch.cuda.is_available()
         True
     
-    pip install easyocr==1.7.2  # conda install anaconda::easyocr  # ==1.7.0 
+    pip install easyocr==1.7.2
 
     conda install conda-forge::tesseract==5.3.1
     conda install -c conda-forge pytesseract==0.3.13
