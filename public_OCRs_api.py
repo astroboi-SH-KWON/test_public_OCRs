@@ -26,6 +26,7 @@ def publicOCRs_api():
     data = json.loads(data)
     ocr_obj = data['ocr_object']
     ocr_mdl = data['ocr_model']
+    gpu_flag = data['gpu_flag']  # (String) 'True', 'False'
 
     if utils.is_hexadecimal(ocr_obj):
         print("is_hexadecimal >>>>>>>>>>>>>>>>>>>>>>>>")
@@ -58,7 +59,7 @@ def publicOCRs_api():
     print(f"load_img_by_cv2 ::: {time.perf_counter() - st_time} sec")
 
     ocr_st_time = time.perf_counter()
-    public_ocr = publicOCRsProcessor.publicOCRs()
+    public_ocr = publicOCRsProcessor.publicOCRs(gpu_flag)
     if ocr_mdl == "tesseract":
         result_text = public_ocr.get_ocr_result(ocr_obj_img, tessdata_prefix=config.TESSDATA_PREFIX[ocr_mdl])
     elif ocr_mdl == "easyocr":
@@ -66,9 +67,9 @@ def publicOCRs_api():
     else:
         raise ValueError("Check OCR model.")
 
+    print(f"publicOCRs_api {ocr_mdl} ::: {time.perf_counter() - ocr_st_time} sec")
     # # make_response for not only English but also non-English like Korean
     resp = make_response(json.dumps(result_text, ensure_ascii=False).encode("utf-8"))
-    print(f"onyOCR_api ::: {time.perf_counter() - ocr_st_time} sec")
     return resp
 
 
@@ -79,6 +80,7 @@ def test_publicOCRs_api():
     data = json.loads(data)
     ocr_obj = data['ocr_object']
     ocr_mdl = data['ocr_model']
+    gpu_flag = data['gpu_flag']  # (String) 'True', 'False'
 
     if utils.is_hexadecimal(ocr_obj):
         print("is_hexadecimal >>>>>>>>>>>>>>>>>>>>>>>>")
@@ -112,7 +114,7 @@ def test_publicOCRs_api():
 
     ocr_st_time = time.perf_counter()
 
-    public_ocr = publicOCRsProcessor.publicOCRs()
+    public_ocr = publicOCRsProcessor.publicOCRs(gpu_flag)
     if ocr_mdl == "tesseract" or ocr_mdl == "tesseract_ony" or ocr_mdl == "tesseract_pub":
         result_text = public_ocr.get_ocr_result(ocr_obj_img, tessdata_prefix=config.TESSDATA_PREFIX[ocr_mdl])
     elif ocr_mdl == "easyocr":
@@ -121,10 +123,9 @@ def test_publicOCRs_api():
         raise ValueError("Check OCR model.")
 
     working_time = time.perf_counter() - ocr_st_time
-    print(f"test_onyOCR_api ::: {working_time} sec")
+    print(f"publicOCRs_api {ocr_mdl} ::: {working_time} sec\nresult_text [{result_text}]\n\n")
     # # make_response for not only English but also non-English like Korean
     resp = make_response(json.dumps({'result_text': result_text, 'working_time': working_time}, ensure_ascii=False).encode("utf-8"))
-    print(f"onyOCR_api ::: {time.perf_counter() - ocr_st_time} sec")
     return resp
 
 
