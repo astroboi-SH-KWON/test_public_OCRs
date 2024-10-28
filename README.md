@@ -1,10 +1,14 @@
 # test_public_OCRs
 Tesseract OCR, easyOCR etc
 
-# References
+# References for tesseract
 * https://github.com/madmaze/pytesseract
 * https://www.kaggle.com/code/dhorvay/pytesseract-multiple-languages
 * https://pyimagesearch.com/2020/08/03/tesseract-ocr-for-non-english-languages/
+
+# References for easyocr
+* https://www.jaided.ai/easyocr/
+* https://github.com/JaidedAI/EasyOCR/blob/master/README.md
 
 
 ## 1. Setting up the Environment for silicon mac 
