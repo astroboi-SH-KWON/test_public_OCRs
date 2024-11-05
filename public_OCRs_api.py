@@ -26,7 +26,10 @@ def publicOCRs_api():
     data = json.loads(data)
     ocr_obj = data['ocr_object']
     ocr_mdl = data['ocr_model']
-    gpu_flag = data['gpu_flag']  # (String) 'True', 'False'
+    if 'gpu_flag' in data:
+        gpu_flag = data['gpu_flag']  # (String) 'True', 'False'
+    else:
+        gpu_flag = 'False'
 
     if utils.is_hexadecimal(ocr_obj):
         print("is_hexadecimal >>>>>>>>>>>>>>>>>>>>>>>>")
@@ -47,7 +50,7 @@ def publicOCRs_api():
         utils.remove_files_by_days("./images/tmp_ocr", now)
         cv2.imwrite(f"./images/tmp_ocr/ocr_img_{fl_nm}.jpg", ocr_obj_img)
 
-        if ocr_mdl == "tesseract":
+        if ocr_mdl == "tesseract" or ocr_mdl == "tesseract_ony" or ocr_mdl == "tesseract_pub":
             ocr_obj_img = utils.load_img_by_PIL(f"./images/tmp_ocr/ocr_img_{fl_nm}.jpg")
         elif ocr_mdl == "easyocr":
             ocr_obj_img = utils.load_img_by_cv2(f"./images/tmp_ocr/ocr_img_{fl_nm}.jpg")
@@ -60,7 +63,7 @@ def publicOCRs_api():
 
     ocr_st_time = time.perf_counter()
     public_ocr = publicOCRsProcessor.publicOCRs(gpu_flag)
-    if ocr_mdl == "tesseract":
+    if ocr_mdl == "tesseract" or ocr_mdl == "tesseract_ony" or ocr_mdl == "tesseract_pub":
         result_text = public_ocr.get_ocr_result(ocr_obj_img, tessdata_prefix=config.TESSDATA_PREFIX[ocr_mdl])
     elif ocr_mdl == "easyocr":
         result_text = public_ocr.get_ocr_result(ocr_obj_img, 'easyocr')
@@ -80,7 +83,10 @@ def test_publicOCRs_api():
     data = json.loads(data)
     ocr_obj = data['ocr_object']
     ocr_mdl = data['ocr_model']
-    gpu_flag = data['gpu_flag']  # (String) 'True', 'False'
+    if 'gpu_flag' in data:
+        gpu_flag = data['gpu_flag']  # (String) 'True', 'False'
+    else:
+        gpu_flag = 'False'
 
     if utils.is_hexadecimal(ocr_obj):
         print("is_hexadecimal >>>>>>>>>>>>>>>>>>>>>>>>")
