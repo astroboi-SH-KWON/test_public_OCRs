@@ -52,7 +52,7 @@ def publicOCRs_api():
 
         if ocr_mdl == "tesseract" or ocr_mdl == "tesseract_ony" or ocr_mdl == "tesseract_pub":
             ocr_obj_img = utils.load_img_by_PIL(f"./images/tmp_ocr/ocr_img_{fl_nm}.jpg")
-        elif ocr_mdl == "easyocr":
+        elif ocr_mdl == "easyocr" or ocr_mdl == "easyocr_cropped":
             ocr_obj_img = utils.load_img_by_cv2(f"./images/tmp_ocr/ocr_img_{fl_nm}.jpg")
         else:
             raise ValueError("Check OCR model.")
@@ -65,10 +65,10 @@ def publicOCRs_api():
     public_ocr = publicOCRsProcessor.publicOCRs(gpu_flag)
     if ocr_mdl == "tesseract" or ocr_mdl == "tesseract_ony" or ocr_mdl == "tesseract_pub":
         result_text = public_ocr.get_ocr_result(ocr_obj_img, tessdata_prefix=config.TESSDATA_PREFIX[ocr_mdl])
-    elif ocr_mdl == "easyocr":
+    elif ocr_mdl == "easyocr" or ocr_mdl == "easyocr_cropped":
         result_text = public_ocr.get_ocr_result(ocr_obj_img, 'easyocr')
     else:
-        raise ValueError("Check OCR model.")
+        raise ValueError("Check OCR model. [public_OCRs_api.py]")
 
     print(f"publicOCRs_api {ocr_mdl} ::: {time.perf_counter() - ocr_st_time} sec")
     # # make_response for not only English but also non-English like Korean
@@ -109,7 +109,7 @@ def test_publicOCRs_api():
 
         if ocr_mdl == "tesseract" or ocr_mdl == "tesseract_ony" or ocr_mdl == "tesseract_pub":
             ocr_obj_img = utils.load_img_by_PIL(f"./images/tmp_ocr/ocr_img_{fl_nm}.jpg")
-        elif ocr_mdl == "easyocr":
+        elif ocr_mdl == "easyocr" or ocr_mdl == "easyocr_cropped":
             ocr_obj_img = utils.load_img_by_cv2(f"./images/tmp_ocr/ocr_img_{fl_nm}.jpg")
         else:
             raise ValueError("Check OCR model.")
@@ -123,10 +123,10 @@ def test_publicOCRs_api():
     public_ocr = publicOCRsProcessor.publicOCRs(gpu_flag)
     if ocr_mdl == "tesseract" or ocr_mdl == "tesseract_ony" or ocr_mdl == "tesseract_pub":
         result_text = public_ocr.get_ocr_result(ocr_obj_img, tessdata_prefix=config.TESSDATA_PREFIX[ocr_mdl])
-    elif ocr_mdl == "easyocr":
-        result_text = public_ocr.get_ocr_result(ocr_obj_img, 'easyocr')
+    elif ocr_mdl == "easyocr" or ocr_mdl == "easyocr_cropped":
+        result_text = public_ocr.get_ocr_result(ocr_obj_img, ocr_mdl)
     else:
-        raise ValueError("Check OCR model.")
+        raise ValueError("Check OCR model. [public_OCRs_api.py]")
 
     working_time = time.perf_counter() - ocr_st_time
     print(f"publicOCRs_api {ocr_mdl} ::: {working_time} sec\nresult_text [{result_text}]\n\n")
