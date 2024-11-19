@@ -9,6 +9,7 @@ class publicOCRs:
         self.gpu_flag = False
         if gpu_flag.lower() == 'true':
             self.gpu_flag = True
+        self.img_pre = ImagePreprocessor()
 
     def get_ocr_result(self, img, which_ocr='tesseract', tessdata_prefix=''):
         """
@@ -20,7 +21,8 @@ class publicOCRs:
         """
         if which_ocr == 'tesseract':
             os.environ['TESSDATA_PREFIX'] = tessdata_prefix
-            return self.get_tesseract_result(img)
+            *_, img_cv_grey = self.img_pre.preprocess_image(img)
+            return self.get_tesseract_result(img_cv_grey)
         elif which_ocr == 'easyocr':
             return self.get_easyocr_result(img)
         elif which_ocr == 'easyocr_cropped':
@@ -52,8 +54,7 @@ class publicOCRs:
         :return: (List) OCR results
         """
         reader = easyocr.Reader(['ko', 'en'], gpu=self.gpu_flag)
-        img_pre = ImagePreprocessor()
-        *_, img_cv_grey = img_pre.preprocess_image(img)
+        *_, img_cv_grey = self.img_pre.preprocess_image(img)
         return reader.recognize(img_cv_grey)[0][1]
 
 
