@@ -45,3 +45,4 @@ Tesseract OCR, easyOCR etc
     conda install conda-forge::tesseract==5.3.1
     conda install -c conda-forge pytesseract==0.3.13
     conda install -c anaconda flask==3.0.3  # ~_api.py 사용 위해. v2.2.2 in mac studio, v3.0.3 in astroboi_m2
+    pip install imutils==0.5.4
