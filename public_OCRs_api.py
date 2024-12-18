@@ -49,13 +49,7 @@ def publicOCRs_api():
         os.makedirs("./images/tmp_ocr", exist_ok=True)
         utils.remove_files_by_days("./images/tmp_ocr", now)
         cv2.imwrite(f"./images/tmp_ocr/ocr_img_{fl_nm}.jpg", ocr_obj_img)
-
-        if ocr_mdl == "tesseract" or ocr_mdl == "tesseract_ony" or ocr_mdl == "tesseract_pub":
-            ocr_obj_img = utils.load_img_by_PIL(f"./images/tmp_ocr/ocr_img_{fl_nm}.jpg")
-        elif ocr_mdl == "easyocr" or ocr_mdl == "easyocr_cropped":
-            ocr_obj_img = utils.load_img_by_cv2(f"./images/tmp_ocr/ocr_img_{fl_nm}.jpg")
-        else:
-            raise ValueError("Check OCR model.")
+        ocr_obj_img = utils.load_img_by_cv2(f"./images/tmp_ocr/ocr_img_{fl_nm}.jpg")
     except Exception as err:
         print(err)
         return abort(make_response(str(err), 500))
@@ -106,13 +100,7 @@ def test_publicOCRs_api():
         os.makedirs("./images/tmp_ocr", exist_ok=True)
         utils.remove_files_by_days("./images/tmp_ocr", now)
         cv2.imwrite(f"./images/tmp_ocr/ocr_img_{fl_nm}.jpg", ocr_obj_img)
-
-        if ocr_mdl == "tesseract" or ocr_mdl == "tesseract_ony" or ocr_mdl == "tesseract_pub":
-            ocr_obj_img = utils.load_img_by_PIL(f"./images/tmp_ocr/ocr_img_{fl_nm}.jpg")
-        elif ocr_mdl == "easyocr" or ocr_mdl == "easyocr_cropped":
-            ocr_obj_img = utils.load_img_by_cv2(f"./images/tmp_ocr/ocr_img_{fl_nm}.jpg")
-        else:
-            raise ValueError("Check OCR model.")
+        ocr_obj_img = utils.load_img_by_cv2(f"./images/tmp_ocr/ocr_img_{fl_nm}.jpg")
     except Exception as err:
         print(err)
         return abort(make_response(str(err), 500))
