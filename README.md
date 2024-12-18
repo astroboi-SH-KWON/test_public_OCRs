@@ -23,6 +23,7 @@ Tesseract OCR, easyOCR etc
     conda install -c conda-forge pytesseract==0.3.13
 
     conda install -c anaconda flask==3.0.3  # ~_api.py 사용 위해. v2.2.2 in mac studio, v3.0.3 in astroboi_m2
+    pip install imutils==0.5.4
 
     For language pack : https://pyimagesearch.com/2020/08/03/tesseract-ocr-for-non-english-languages/
         os.environ['TESSDATA_PREFIX'] = "/Users/{User}/anaconda3/pkgs/tesseract-5.3.2-hbe6b26a_2/share/tessdata"
