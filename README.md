@@ -52,3 +52,6 @@ Tesseract OCR, easyOCR etc
     conda install -c conda-forge pytesseract==0.3.13
     conda install -c anaconda flask==3.0.3  # ~_api.py 사용 위해. v2.2.2 in mac studio, v3.0.3 in astroboi_m2
     pip install imutils==0.5.4
+
+    pip install paddleocr==2.9.1
+    pip install paddlepaddle==2.6.2
