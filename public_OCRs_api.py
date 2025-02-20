@@ -61,6 +61,8 @@ def publicOCRs_api():
         result_text = public_ocr.get_ocr_result(ocr_obj_img, tessdata_prefix=config.TESSDATA_PREFIX[ocr_mdl])
     elif ocr_mdl == "easyocr" or ocr_mdl == "easyocr_cropped":
         result_text = public_ocr.get_ocr_result(ocr_obj_img, ocr_mdl)
+    elif ocr_mdl == "paddleocr":
+        result_text = public_ocr.get_ocr_result(ocr_obj_img, ocr_mdl)
     else:
         raise ValueError("Check OCR model. [public_OCRs_api.py]")
 
@@ -112,6 +114,8 @@ def test_publicOCRs_api():
     if ocr_mdl == "tesseract" or ocr_mdl == "tesseract_ony" or ocr_mdl == "tesseract_pub":
         result_text = public_ocr.get_ocr_result(ocr_obj_img, tessdata_prefix=config.TESSDATA_PREFIX[ocr_mdl])
     elif ocr_mdl == "easyocr" or ocr_mdl == "easyocr_cropped":
+        result_text = public_ocr.get_ocr_result(ocr_obj_img, ocr_mdl)
+    elif ocr_mdl == "paddleocr":
         result_text = public_ocr.get_ocr_result(ocr_obj_img, ocr_mdl)
     else:
         raise ValueError("Check OCR model. [public_OCRs_api.py]")
